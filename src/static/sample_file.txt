@@ -1,0 +1,1 @@
+Sample File. You can put anything in this folder and it should be copied to the "public/assets/static".
