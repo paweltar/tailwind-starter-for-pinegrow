@@ -1,5 +1,8 @@
 const { src, dest, watch, parallel, series } = require('gulp');
 const postcss = require('gulp-postcss');
+const babel = require('gulp-babel');
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
 const sync = require('browser-sync').create();
 
 function copy(cb) {
@@ -15,9 +18,26 @@ function generateCSS(cb) {
   cb();
 }
 
+function generateJS(cb) {
+  src('src/js/index.js')
+    .pipe(sourcemaps.init())
+    .pipe(
+      babel({
+        presets: ['@babel/env'],
+      })
+    )
+    .pipe(concat('app.js'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest('public/assets'));
+  sync.reload();
+  cb();
+}
+
 function watchFiles(cb) {
   watch('src/static/**', copy);
   watch('src/styles/**', generateCSS);
+  watch('src/js/**', generateJS);
+  watch('./public/**.html').on('change', sync.reload);
 }
 
 function browserSync(cb) {
@@ -26,10 +46,7 @@ function browserSync(cb) {
       baseDir: './public',
     },
   });
-
-  watch('src/static/**', copy);
-  watch('src/styles/**', generateCSS);
-  watch('./public/**.html').on('change', sync.reload);
+  watchFiles();
 }
 
 exports.sync = browserSync;
@@ -38,4 +55,4 @@ exports.css = generateCSS;
 exports.copy = copy;
 
 // Default Task
-exports.default = series(parallel(generateCSS, copy), browserSync);
+exports.default = series(parallel(generateCSS, generateJS, copy), browserSync);
