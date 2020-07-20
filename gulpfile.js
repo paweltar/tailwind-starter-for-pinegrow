@@ -1,4 +1,4 @@
-const { src, dest, watch } = require('gulp');
+const { src, dest, watch, parallel, series } = require('gulp');
 const postcss = require('gulp-postcss');
 const sync = require('browser-sync').create();
 
@@ -36,3 +36,6 @@ exports.sync = browserSync;
 exports.watch = watchFiles;
 exports.css = generateCSS;
 exports.copy = copy;
+
+// Default Task
+exports.default = series(parallel(generateCSS, copy), browserSync);
