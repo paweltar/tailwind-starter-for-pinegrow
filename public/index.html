@@ -5,9 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>🌱 Tailwind Pinegrow Starter</title>
         <link rel="stylesheet" href="./assets/tailwind.css">
+        <!-- Alpine JS -->
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     </head>
-    <body class="flex items-center justify-center min-h-screen">
-        <p class="text-base">🌱 Hello World 🌱</p>
+    <body class="flex flex-col items-center justify-center min-h-screen">
+        <p class="p-3 text-base">🌱 Hello World 🌱</p>
+        <span x-data="{message:'🤖 Hello Alpine 🤓'}" x-text="message" class="p-3"></span>
     </body>
     <script src="./assets/app.js"></script>
 </html>
