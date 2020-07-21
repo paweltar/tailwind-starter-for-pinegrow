@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>🌱 Tailwind Pinegrow Starter</title>
+        <title>Tailwind Pinegrow Starter</title>
+        <!-- Emoji as Favicon -->
+        <link rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
         <link rel="stylesheet" href="./assets/tailwind.css">
         <!-- Alpine JS -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     </head>
+
     <body class="flex flex-col items-center justify-center min-h-screen">
         <p class="p-3 text-base">🌱 Hello World 🌱</p>
         <span x-data="{message:'🤖 Hello Alpine 🤓'}" x-text="message" class="p-3"></span>
     </body>
     <script src="./assets/app.js"></script>
+
 </html>
