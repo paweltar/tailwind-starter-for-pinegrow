@@ -61,3 +61,6 @@ exports.copy = copy;
 
 // Default Task - type "gulp" in terminal to run it.
 exports.default = series(parallel(generateCSS, generateJS, copy), browserSync);
+
+// Build Task for Netlify
+exports.build = parallel(generateCSS, generateJS, copy);
