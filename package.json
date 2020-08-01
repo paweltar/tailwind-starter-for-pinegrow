@@ -1,13 +1,15 @@
 {
   "name": "tailwind-pinegrow",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Tailwind / Alpine JS starter for Pinegrow Web Editor.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "tailwind",
+    "alpine",
+    "pinegrow",
+    "gulp"
+  ],
+  "author": "paweltar",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.11.0",
