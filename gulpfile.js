@@ -5,11 +5,13 @@ const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const sync = require('browser-sync').create();
 
+// Copy all files from src/static to public/assets/static.
 function copy(cb) {
   src('src/static/**').pipe(dest('public/assets/static'));
   cb();
 }
 
+// Process Tailwind CSS file, output it to public/assets and reload browser.
 function generateCSS(cb) {
   src('src/styles/tailwind.css')
     .pipe(postcss([require('tailwindcss')]))
@@ -18,6 +20,7 @@ function generateCSS(cb) {
   cb();
 }
 
+// Process JS, generate sourcemap, output it to public/assets and reload browser.
 function generateJS(cb) {
   src('src/js/index.js')
     .pipe(sourcemaps.init())
@@ -33,6 +36,7 @@ function generateJS(cb) {
   cb();
 }
 
+// Watch for any changes in directories listed below and when change is detected - run relevant task. Reload browser always when the HTML file inside 'public' folder changes.
 function watchFiles(cb) {
   watch('src/static/**', copy);
   watch('src/styles/**', generateCSS);
@@ -40,6 +44,7 @@ function watchFiles(cb) {
   watch('./public/**.html').on('change', sync.reload);
 }
 
+// Serve files from 'public' folder.
 function browserSync(cb) {
   sync.init({
     server: {
@@ -54,5 +59,5 @@ exports.watch = watchFiles;
 exports.css = generateCSS;
 exports.copy = copy;
 
-// Default Task
+// Default Task - type "gulp" in terminal to run it.
 exports.default = series(parallel(generateCSS, generateJS, copy), browserSync);
